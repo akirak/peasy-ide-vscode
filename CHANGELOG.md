@@ -12,6 +12,15 @@ All notable changes to the Peasy extension are documented in this file.
 ### Fixed
 - Saving a P file no longer also runs a background Stately compile, which
   duplicated compilation and failed on P 3.1+.
+- `PeasyViz: Run` now works in restricted-mode workspaces. The extension
+  activates in untrusted workspaces in limited mode; compilation and test
+  execution remain blocked with an explanatory message.
+- The visualizer command is registered under both `peasy-visualizer.run` and
+  the legacy `peasy-visualizer:run` id, and is registered before the other
+  integrations so a compile/test initialization failure cannot hide it.
+- The visualizer now finds `PCheckerOutput` next to the P project (the
+  workspace root or any `*.pproj`) instead of assuming it is directly under the
+  first workspace folder, and correctly awaits the directory check.
 
 ## [1.1.0] - 2026-05-24
 

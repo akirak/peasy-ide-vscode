@@ -16,7 +16,11 @@
   "activationEvents": [
     "onLanguage:p",
     "workspaceContains:**/*.p",
-    "workspaceContains:**/*.pproj"
+    "workspaceContains:**/*.pproj",
+    "onCommand:peasy-visualizer.run",
+    "onCommand:peasy-visualizer:run",
+    "onCommand:peasy.compile",
+    "onCommand:peasy.showProjectFiles"
   ],
   "repository": {
     "type": "git",
@@ -46,8 +50,14 @@
   "capabilities": {
     "virtualWorkspaces": false,
     "untrustedWorkspaces": {
-      "supported": false,
-      "description": "P compilation runs shell commands in the workspace."
+      "supported": "limited",
+      "description": "The trace visualizer is available in restricted mode. Compiling and running P tests require a trusted workspace because they execute shell commands.",
+      "restrictedConfigurations": [
+        "p-vscode.dotnetExecutablePath",
+        "p-vscode.languageServer.cliPath",
+        "p-vscode.languageServer.launchArgs",
+        "p-vscode.additionalArgs"
+      ]
     }
   },
   "main": "./dist/extension.js",
@@ -155,8 +165,7 @@
               "args": "terminateAll"
             },
             {
-              "command": "workbench.action.tasks.runTask",
-              "args": "p-vscode: Compile"
+              "command": "peasy.compile"
             }
           ]
         }
@@ -172,8 +181,7 @@
               "args": "terminateAll"
             },
             {
-              "command": "workbench.action.tasks.runTask",
-              "args": "p-vscode: Compile"
+              "command": "peasy.compile"
             }
           ]
         }
@@ -289,11 +297,24 @@
         "title": "Run"
       },
       {
+        "command": "peasy-visualizer:run",
+        "category": "PeasyViz",
+        "title": "Run (legacy command alias)"
+      },
+      {
         "command": "peasy.compile",
         "category": "Peasy",
         "title": "Compile Current Project"
       }
     ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "peasy-visualizer:run",
+          "when": "false"
+        }
+      ]
+    },
     "languages": [
       {
         "id": "p",

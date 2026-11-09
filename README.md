@@ -58,6 +58,10 @@ interfere with the host IDE's defaults when you're editing other files.
 | `F6` | Open the Peasy trace visualizer |
 | `F4` / `Ctrl+L` | Show the project file picker |
 
+In VS Code Restricted Mode, the trace visualizer (`F6` / `PeasyViz: Run`) and
+the project picker are available. Compiling and running P tests require a
+trusted workspace because they execute `p` in the workspace.
+
 ## Development
 
 ```bash
